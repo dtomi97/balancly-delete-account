@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Balancly – Delete Account</title>
+  <title>Balancly – Delete Account / Fiók törlése</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -21,6 +21,28 @@
       padding: 40px 40px 48px;
       box-shadow: 0 2px 16px rgba(0,0,0,0.07);
     }
+    .lang-switcher {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+    .lang-btn {
+      padding: 6px 18px;
+      border-radius: 20px;
+      border: 2px solid #4caf50;
+      background: transparent;
+      color: #4caf50;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .lang-btn.active {
+      background: #4caf50;
+      color: #fff;
+    }
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
     h1 { font-size: 2rem; font-weight: 800; color: #111; margin-bottom: 6px; }
     .subtitle { color: #888; font-size: 0.9rem; margin-bottom: 40px; }
     h2 {
@@ -30,7 +52,6 @@
       border-left: 3px solid #4caf50;
     }
     p { margin-bottom: 12px; color: #444; }
-    ol { margin: 8px 0 12px 20px; color: #444; }
     ul { margin: 8px 0 12px 20px; color: #444; }
     li { margin-bottom: 8px; }
     a { color: #2e7d32; text-decoration: none; }
@@ -74,13 +95,10 @@
       background: #f1f8e9;
       border-left: 3px solid #4caf50;
       border-radius: 0 8px 8px 0;
-      padding: 12px 16px 12px 16px;
+      padding: 12px 16px;
       margin: 16px 0;
     }
-    .deleted-list ul {
-      margin: 0 0 0 16px;
-      color: #33691e;
-    }
+    .deleted-list ul { margin: 0 0 0 16px; color: #33691e; }
     @media (max-width: 600px) {
       .container { padding: 24px 20px 36px; border-radius: 0; }
     }
@@ -88,85 +106,112 @@
 </head>
 <body>
   <div class="container">
-    <h1>Delete Account</h1>
-    <p class="subtitle">Balancly – Finance Manager &nbsp;·&nbsp; Account & Data Deletion</p>
 
-    <p>
-      You can delete your Balancly account and all associated data directly from within the app
-      at any time. No need to contact us — the deletion is immediate and permanent.
-    </p>
-
-    <h2>How to delete your account</h2>
-
-    <div class="step">
-      <div class="step-number">1</div>
-      <div class="step-text">Open the <strong>Balancly</strong> app and make sure you are signed in.</div>
-    </div>
-    <div class="step">
-      <div class="step-number">2</div>
-      <div class="step-text">Tap the <strong>Profile</strong> tab at the bottom of the screen.</div>
-    </div>
-    <div class="step">
-      <div class="step-number">3</div>
-      <div class="step-text">Scroll down to the <strong>Delete Account</strong> section.</div>
-    </div>
-    <div class="step">
-      <div class="step-number">4</div>
-      <div class="step-text">Tap <strong>Delete Account</strong> and confirm when prompted.</div>
-    </div>
-    <div class="step">
-      <div class="step-number">5</div>
-      <div class="step-text">Your account and all data will be permanently deleted immediately.</div>
+    <!-- Language switcher -->
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="switchLang('en')">English</button>
+      <button class="lang-btn" onclick="switchLang('hu')">Magyar</button>
     </div>
 
-    <div class="warning-box">
-      ⚠️ <strong>This action is irreversible.</strong> Once deleted, your account and all associated
-      data cannot be recovered. Make sure to export your data first if you wish to keep a copy
-      (Profile → Data Management → Export).
+    <!-- ══ ENGLISH ══ -->
+    <div id="content-en" class="lang-content active">
+      <h1>Delete Account</h1>
+      <p class="subtitle">Balancly – Finance Manager &nbsp;·&nbsp; Account & Data Deletion</p>
+
+      <p>You can delete your Balancly account and all associated data directly from within the app at any time. No need to contact us — the deletion is immediate and permanent.</p>
+
+      <h2>How to delete your account</h2>
+
+      <div class="step"><div class="step-number">1</div><div class="step-text">Open the <strong>Balancly</strong> app and make sure you are signed in.</div></div>
+      <div class="step"><div class="step-number">2</div><div class="step-text">Tap the <strong>Profile</strong> tab at the bottom of the screen.</div></div>
+      <div class="step"><div class="step-number">3</div><div class="step-text">Scroll down to the <strong>Delete Account</strong> section.</div></div>
+      <div class="step"><div class="step-number">4</div><div class="step-text">Tap <strong>Delete Account</strong> and confirm when prompted.</div></div>
+      <div class="step"><div class="step-number">5</div><div class="step-text">Your account and all data will be permanently deleted immediately.</div></div>
+
+      <div class="warning-box">
+        ⚠️ <strong>This action is irreversible.</strong> Once deleted, your account and all associated data cannot be recovered. Make sure to export your data first if you wish to keep a copy (Profile → Data Management → Export).
+      </div>
+
+      <h2>What gets deleted</h2>
+      <div class="deleted-list">
+        <ul>
+          <li>Your Firebase account and login credentials</li>
+          <li>All transactions — expenses and incomes</li>
+          <li>All custom categories and category limits</li>
+          <li>All recurring expenses</li>
+          <li>Your preferences and settings</li>
+          <li>Your RevenueCat subscription record (GDPR erasure)</li>
+        </ul>
+      </div>
+
+      <p>Active subscriptions are <strong>not automatically cancelled</strong> when you delete your account. Please cancel your subscription through the <a href="https://play.google.com/store/account/subscriptions" target="_blank">Google Play Store</a> or <a href="https://apps.apple.com/account/subscriptions" target="_blank">Apple App Store</a> before deleting your account to avoid further charges.</p>
+
+      <h2>Can't access the app?</h2>
+      <p>If you are unable to sign in to the app and need your account deleted, please contact us directly and we will process the deletion manually within 30 days:</p>
+      <p><a href="mailto:privacy@balancly.app">privacy@balancly.app</a></p>
+      <p>Please include the email address associated with your Balancly account in your request.</p>
+
+      <h2>Data retention after deletion</h2>
+      <p>All personal data is deleted immediately upon account deletion. Backup copies stored in Firebase's infrastructure may persist for up to 30 days before being fully purged. No personal data is retained beyond this period.</p>
     </div>
 
-    <h2>What gets deleted</h2>
+    <!-- ══ HUNGARIAN ══ -->
+    <div id="content-hu" class="lang-content">
+      <h1>Fiók törlése</h1>
+      <p class="subtitle">Balancly – Személyes pénzügyi menedzser &nbsp;·&nbsp; Fiók és adatok törlése</p>
 
-    <div class="deleted-list">
-      <ul>
-        <li>Your Firebase account and login credentials</li>
-        <li>All transactions — expenses and incomes</li>
-        <li>All custom categories and category limits</li>
-        <li>All recurring expenses</li>
-        <li>Your preferences and settings</li>
-        <li>Your RevenueCat subscription record (GDPR erasure)</li>
-      </ul>
+      <p>A Balancly fiókodat és az összes kapcsolódó adatot bármikor törölheted közvetlenül az alkalmazásból. Nincs szükség kapcsolatfelvételre — a törlés azonnali és visszafordíthatatlan.</p>
+
+      <h2>A fiók törlésének menete</h2>
+
+      <div class="step"><div class="step-number">1</div><div class="step-text">Nyisd meg a <strong>Balancly</strong> alkalmazást, és győződj meg róla, hogy be vagy jelentkezve.</div></div>
+      <div class="step"><div class="step-number">2</div><div class="step-text">Érintsd meg a képernyő alján található <strong>Profil</strong> fület.</div></div>
+      <div class="step"><div class="step-number">3</div><div class="step-text">Görgess le a <strong>Fiók törlése</strong> részhez.</div></div>
+      <div class="step"><div class="step-number">4</div><div class="step-text">Érintsd meg a <strong>Fiók törlése</strong> gombot, majd erősítsd meg a műveletet.</div></div>
+      <div class="step"><div class="step-number">5</div><div class="step-text">A fiókod és az összes adatod azonnal és véglegesen törlésre kerül.</div></div>
+
+      <div class="warning-box">
+        ⚠️ <strong>Ez a művelet visszafordíthatatlan.</strong> A törlés után a fiókod és az összes kapcsolódó adat nem állítható vissza. Ha szeretnél másolatot tartani az adataidról, előbb exportáld azokat (Profil → Adatkezelés → Exportálás).
+      </div>
+
+      <h2>Mi kerül törlésre</h2>
+      <div class="deleted-list">
+        <ul>
+          <li>Firebase fiókod és bejelentkezési adataid</li>
+          <li>Összes tranzakció — kiadások és bevételek</li>
+          <li>Összes egyéni kategória és kategória limit</li>
+          <li>Összes ismétlődő kiadás</li>
+          <li>Beállításaid és preferenciáid</li>
+          <li>RevenueCat előfizetési rekordod (GDPR törlési kérelem)</li>
+        </ul>
+      </div>
+
+      <p>Az aktív előfizetések <strong>nem kerülnek automatikusan lemondásra</strong> a fiók törlésekor. A további díjfelszámítás elkerülése érdekében kérjük, mondj le az előfizetésedről a <a href="https://play.google.com/store/account/subscriptions" target="_blank">Google Play Áruházon</a> vagy az <a href="https://apps.apple.com/account/subscriptions" target="_blank">Apple App Store-on</a> keresztül, mielőtt törölnéd a fiókodat.</p>
+
+      <h2>Nem tudsz bejelentkezni az alkalmazásba?</h2>
+      <p>Ha nem tudsz bejelentkezni az alkalmazásba, és szeretnéd töröltetni a fiókodat, vedd fel velünk a kapcsolatot, és 30 napon belül manuálisan feldolgozzuk a kérelmedet:</p>
+      <p><a href="mailto:balancly.support@gmail.com">balancly.support@gmail.com</a></p>
+      <p>Kérjük, add meg a Balancly fiókodhoz tartozó e-mail-címet a kérelmедben.</p>
+
+      <h2>Adatmegőrzés törlés után</h2>
+      <p>Minden személyes adat azonnal törlődik a fiók törlésekor. A Firebase infrastruktúrájában tárolt biztonsági mentések legfeljebb 30 napig maradhatnak meg, mielőtt véglegesen törlődnek. Ezen időszakon túl semmilyen személyes adatot nem őrzünk meg.</p>
     </div>
 
-    <p>
-      Active subscriptions are <strong>not automatically cancelled</strong> when you delete your account.
-      Please cancel your subscription through the
-      <a href="https://play.google.com/store/account/subscriptions" target="_blank">Google Play Store</a>
-      or
-      <a href="https://apps.apple.com/account/subscriptions" target="_blank">Apple App Store</a>
-      before deleting your account to avoid further charges.
-    </p>
-
-    <h2>Can't access the app?</h2>
-
-    <p>
-      If you are unable to sign in to the app and need your account deleted, please contact us
-      directly and we will process the deletion manually within 30 days:
-    </p>
-    <p>
-      <a href="mailto:balancly.support@gmail.com">balancly.support@gmail.com</a>
-    </p>
-    <p>
-      Please include the email address associated with your Balancly account in your request.
-    </p>
-
-    <h2>Data retention after deletion</h2>
-
-    <p>
-      All personal data is deleted immediately upon account deletion. Backup copies stored in
-      Firebase's infrastructure may persist for up to 30 days before being fully purged.
-      No personal data is retained beyond this period.
-    </p>
   </div>
+
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('.lang-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.lang-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById('content-' + lang).classList.add('active');
+      document.querySelector('[onclick="switchLang(\'' + lang + '\')"]').classList.add('active');
+    }
+
+    // Auto-detect browser language on load
+    const browserLang = navigator.language || navigator.userLanguage;
+    if (browserLang && browserLang.toLowerCase().startsWith('hu')) {
+      switchLang('hu');
+    }
+  </script>
 </body>
 </html>
